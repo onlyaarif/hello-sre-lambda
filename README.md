@@ -1,63 +1,77 @@
-# ☁️ Lambda@Edge with Terraform – hello-sre-lambda
+Hello SRE Lambda@Edge - Terraform Project
+✅ Deployed via Terraform | AWS Lambda@Edge + CloudFront | Python | Infrastructure-as-Code
 
-This project demonstrates deploying an AWS Lambda function with **Terraform**, and associating it with **Amazon CloudFront** as a **Lambda@Edge** function.
+📌 Overview
+This project demonstrates a complete hands-on setup to:
 
-## 🔧 Technologies Used
+Deploy a Python-based AWS Lambda@Edge function
 
-- **Terraform** – Infrastructure as Code
-- **AWS Lambda** – Serverless compute
-- **Lambda@Edge** – Globally replicated function
-- **Amazon CloudFront** – CDN to trigger the Lambda
-- **Git + GitHub** – Version control
+Triggered via CloudFront distribution
 
-## 📂 Project Structure
+Using fully automated Terraform infrastructure
 
-hello-sre-lambda/ ├── lambda/ │ └── lambda_function.py # Your Lambda handler ├── main.tf # Terraform config ├── provider.tf # AWS provider setup ├── .gitignore ├── README.md
+With a custom HTML response
 
-## 🚀 How to Deploy
+IAM roles, Lambda permissions, and edge configurations defined cleanly
 
-### Prerequisites
-- AWS CLI configured (`aws configure`)
-- Terraform installed
-- Access keys securely set (via `~/.aws/credentials`)
+Zipped, structured, and pushed via GitHub
 
-### Deployment Steps
+Built by Arif with deep love and late-night persistence 💪✨
 
-```bash
+📂 Folder Structure
+
+hello-sre-lambda/
+│
+├── .gitignore
+├── README.md
+│
+├── lambda/
+│   ├── lambda_function.py         # Python Lambda function code
+│   └── lambda_function.zip        # Zipped package for deployment
+│
+├── terraform/
+│   ├── main.tf                    # All Terraform resources
+│   ├── provider.tf                # AWS provider setup
+│   ├── variables.tf               # Declared variables
+│   ├── outputs.tf                 # Final ARN & Domain outputs
+│   ├── dev.tfvars                 # Contains AWS keys (gitignored)
+│   └── terraform.tfstate*         # State files (auto-managed)
+
+
+🚀 Deploy Instructions
+Make sure AWS CLI & Terraform are configured. Then run:
+
+cd terraform
 terraform init
-terraform plan
-terraform apply
+terraform apply -var-file="dev.tfvars"
 
-After apply, visit your CloudFront domain and view the live Lambda response!
+📦 Outputs
+After apply, you’ll get:
 
-🛡️ Security Note
-✅ No AWS credentials are hardcoded.
-🚫 GitHub Push Protection is enabled to block secret leaks.
+✅ Lambda@Edge function ARN
 
-📦 Future Enhancements
-Split Lambda logic into separate handlers
+🌐 CloudFront Domain URL
 
-Add CI/CD (GitHub Actions / Jenkins)
+🧪 Test the Setup
 
-Add logging with AWS CloudWatch
+Visit the CloudFront domain in the browser:
+https://your-cloudfront-domain.cloudfront.net
 
-Add input/output variables
+You should see:
+✅ Hello from Arif's Lambda@Edge function!
 
-Feel free to fork, improve, or use this structure for your own Lambda projects!
+🔐 Security Notes
+dev.tfvars contains access keys → should be .gitignored
 
-👨‍💻 Created by Arif
-Proudly learning DevOps the right way
+lambda_function.zip is also ignored → zipped locally before apply
 
+🧠 Learning Outcomes
+Real-world Terraform practice (apply, plan, state management)
 
----
+CloudFront and Lambda@Edge integration
 
-## ✅ What You Can Do:
+IAM role & policy setup
 
-1. Copy this into your `README.md`
-2. Tweak any parts (like description, your GitHub name, etc.)
-3. Commit & push:
+Debugging AWS edge errors and conflict resolution
 
-```bash
-git add README.md
-git commit -m "Update README with full project info"
-git push
+Folder refactoring & GitHub best practices

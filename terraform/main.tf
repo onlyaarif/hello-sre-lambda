@@ -1,5 +1,5 @@
  resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda_exec_role"
+  name = "lambda_exec_role_arif"
 
   assume_role_policy = jsonencode({
   Version = "2012-10-17"
@@ -24,23 +24,23 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
 }
 
 resource "aws_lambda_function" "hello_lambda" {
-  function_name = "hello_sre_lambda"
+  function_name = "hello_sre_lambda_arif"
   runtime       = "python3.9"
   handler       = "lambda_function.handler"
-  filename      = "${path.module}/lambda/lambda_function.zip"
+  filename      = "${path.module}/../lambda/lambda_function.zip"
 
-  source_code_hash = filebase64sha256("${path.module}/lambda/lambda_function.zip")
+  source_code_hash = filebase64sha256("${path.module}/../lambda/lambda_function.zip")
 
   role = aws_iam_role.lambda_exec_role.arn
 }
 
 resource "aws_lambda_function" "cloudfront_lambda" {
   provider     = aws.virginia
-  function_name = "cloudfront_lambda"
+  function_name = "cloudfront_lambda_arif"
   runtime       = "python3.9"
   handler       = "lambda_function.handler"
-  filename      = "${path.module}/lambda/lambda_function.zip"
-  source_code_hash = filebase64sha256("${path.module}/lambda/lambda_function.zip")
+  filename      = "${path.module}/../lambda/lambda_function.zip"
+  source_code_hash = filebase64sha256("${path.module}/../lambda/lambda_function.zip")
   role = aws_iam_role.lambda_exec_role.arn
   publish = true
 }
