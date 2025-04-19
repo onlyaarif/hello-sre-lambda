@@ -24,7 +24,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
 }
 
 resource "aws_lambda_function" "hello_lambda" {
-  function_name = "hello_sre_lambda_arif"
+  function_name = "hello_sre_lambda_arif_v3"
   runtime       = "python3.9"
   handler       = "lambda_function.handler"
   filename      = "${path.module}/../lambda/lambda_function.zip"
@@ -36,7 +36,7 @@ resource "aws_lambda_function" "hello_lambda" {
 
 resource "aws_lambda_function" "cloudfront_lambda" {
   provider     = aws.virginia
-  function_name = "cloudfront_lambda_arif"
+  function_name = "cloudfront_lambda_arif_v3"
   runtime       = "python3.9"
   handler       = "lambda_function.handler"
   filename      = "${path.module}/../lambda/lambda_function.zip"
